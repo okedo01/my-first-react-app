@@ -1,6 +1,6 @@
 const Card = ({title}) => {
   return(
-    <div>
+    <div className="card">
       <h2>Movie: {title}</h2>
     </div>
   )
@@ -8,9 +8,7 @@ const Card = ({title}) => {
 
 const App = () => {
   return(
-    <div>
-      <h1>Cards</h1>
-
+    <div className="card-container">
       <Card title="Star Wars"/>
       <Card title="Avatar"/>
       <Card title="Lion King"/>
