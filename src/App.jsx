@@ -5,10 +5,10 @@ const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const API_OPTIONS = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    authorization: `Bearer ${API_KEY}` 
+  method: 'GET',
+  header: {
+    accept: 'application/json',
+    Authorization: `Bearer ${API_KEY}`
   }
 }
 
@@ -21,7 +21,7 @@ function App() {
 
     fetch(endpoint, API_OPTIONS)
       .then(res => {
-        if(!status.OK) {
+        if(!res.OK) {
           throw new Error("failed to load resources from the server");
         }
         return res.json()
@@ -29,8 +29,7 @@ function App() {
       .then(data => {
         console.log(data);
       }).catch(err => {
-        console.log(err.message);
-        setErrorMessage
+        setErrorMessage(err.message);
       })
   }
 
@@ -48,7 +47,7 @@ function App() {
 
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
         <h1>{searchTerm}</h1>
-        <div>{errorMessage}</div>
+        <div className='error'>{errorMessage}</div>
       </div>
     </main>
   )
