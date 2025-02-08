@@ -1,7 +1,12 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
 const Search = ({searchTerm, setSearchTerm}) => {
     return (
-        <div className="search">
-            <img src="./search" alt="search" />
+        <div className="search flex">
+            <div className="text-white">
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </div>
             <input
                 type="text" 
                 value={searchTerm}
