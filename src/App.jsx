@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Search from './components/search';
-import MovieList from './components/MovieList';
+import Spinner from './components/Spinner';
+import MovieCard from './components/MovieCard';
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -35,7 +36,6 @@ function App() {
       .then(data => {
         setMovieList(data.results);
         setIsLoading(false);
-        
       }).catch(err => {
         setErrorMessage(err.message);
         setIsLoading(false);
@@ -55,17 +55,17 @@ function App() {
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
         </header>
 
-        <section className="movie-list">
-          <h1>All Movies</h1>
+        <section className="all-movies">
+          <h2 className='mt-[40px]'>All Movies</h2>
           
           { isLoading ? (
-            <div className='text-white'>Loading...</div>
+            <Spinner />
           ) : errorMessage ? (
             <div className='text-red-500'>{ errorMessage }</div>
           ) : (
             <ul>
               { movieList.map((movie) => (
-                <p className='text-white'>{ movie.title }</p>
+                <MovieCard key={movie.id} movie={movie}/> 
               ))}
             </ul>
           )}
