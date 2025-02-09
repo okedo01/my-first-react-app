@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useDebounce } from 'react-use';
 import Search from './components/search';
 import Spinner from './components/Spinner';
 import MovieCard from './components/MovieCard';
@@ -19,6 +20,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [ debounceSearchTerm, setDebounceSearchTerm ] = useState('');
 
   const movieApp = (query = '') => {
     setIsLoading(true);
@@ -44,9 +46,11 @@ function App() {
       })
   }
 
+  useDebounce(() => setDebounceSearchTerm(searchTerm), 500, [searchTerm]);
+
   useEffect(() => {
-    movieApp(searchTerm);
-  }, [searchTerm])
+    movieApp(debounceSearchTerm);
+  }, [debounceSearchTerm])
 
   return (
     <main>
