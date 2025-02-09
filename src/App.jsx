@@ -3,6 +3,7 @@ import { useDebounce } from 'react-use';
 import Search from './components/search';
 import Spinner from './components/Spinner';
 import MovieCard from './components/MovieCard';
+import { updateSearchCount } from './appwrite';
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -40,6 +41,7 @@ function App() {
       .then(data => {
         setMovieList(data.results);
         setIsLoading(false);
+        updateSearchCount();
       }).catch(err => {
         setErrorMessage(err.message);
         setIsLoading(false);

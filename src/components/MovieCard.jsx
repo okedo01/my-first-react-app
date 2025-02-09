@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-const MovieCard = ({ movie: {title, vote_average, poster_path, release_date, original_language }  }) => {
+const MovieCard = ({ movie: {title, vote_average, poster_path, release_date, original_language } }) => {
     return (
         <div className="movie-card">
             <img src={poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : '/no-movie.png'} />
@@ -14,7 +14,7 @@ const MovieCard = ({ movie: {title, vote_average, poster_path, release_date, ori
                         <span>•</span>
                         <p className="lang"> { original_language} </p>
                         <span>•</span>
-                        <p className="year">{ release_date ? release_date.split('-')[0] : 'N/A'}</p>
+                        <p className="year">{ release_date ? release_date.split('-')[0] : 'N/A' }</p>
                     </div>
                 </div>
             </div>
