@@ -20,11 +20,13 @@ function App() {
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const movieApp = () => {
+  const movieApp = (query = '') => {
     setIsLoading(true);
     setErrorMessage('');
 
-    const endpoint = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+    const endpoint = query ? 
+    `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}` : 
+    `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
     fetch(endpoint, API_OPTIONS)
       .then(res => {
@@ -43,15 +45,15 @@ function App() {
   }
 
   useEffect(() => {
-    movieApp();
-  }, [])
+    movieApp(searchTerm);
+  }, [searchTerm])
 
   return (
     <main>
       <div className="wrapper">
         <header>
-          <img src="./hero.jpeg" alt="hero banner" />
-          <h1>Find <span className='text-gradient'>Movies</span> you'll enjoy without the Hasstle</h1>
+          <img  className='rounded-2xl object-cover mb-[40px]' src="./hero.jpeg" alt="hero banner" />
+          <h1>Be free to search for <span className="text-gradient">Okedo</span> Movies</h1>
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
         </header>
 
