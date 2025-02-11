@@ -41,7 +41,11 @@ function App() {
       .then(data => {
         setMovieList(data.results);
         setIsLoading(false);
-        updateSearchCount();
+        
+        if(query && data.results.length > 0) {
+          updateSearchCount(query, data.results[0])
+        }
+
       }).catch(err => {
         setErrorMessage(err.message);
         setIsLoading(false);
