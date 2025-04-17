@@ -40,18 +40,18 @@ export const updateSearchCount = async (searchTerm, movie) => {
     });
 };
 
-export const getTrendingMovies = async () => {
-    database.listDocuments(DATABASE_ID, COLLECTION_ID, [
-        Query.limit(5),
-        Query.orderDesc('count')
+export const getTrendingMovies = () => {
+    return database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      Query.limit(5),
+      Query.orderDesc('count')
     ])
-    .then(result => {
-        result.documents;
-    })
-    .then(success => {
-        console.log("successfull", success);
+    .then(response => {
+      return response.documents || [];
     })
     .catch(err => {
-        console.log(err.message);
-    })
-}
+      console.error("Failed to get trending movies", err);
+      return [];
+    });
+  };
+  
+  
