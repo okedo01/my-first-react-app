@@ -40,6 +40,9 @@ function App() {
       })
       .then(data => {
         setMovieList(data.results);
+
+        updateSearchCount();
+
         setIsLoading(false);
         
         if(query && data.results.length > 0) {
